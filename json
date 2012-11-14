@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+import ijson
+import ujson
+import sys
+
+
+def main():
+    if 2 != len(sys.argv):
+        print >>sys.stderr, "Error: Need to enter path as argument. For "\
+            "example, use foo.bar.baz to get elements accessible by "\
+            "traversing keys 'foo', 'bar', 'baz'. To enter lists use 'item'."
+        exit(1)
+    # sys.stdout.
+    for item in ijson.items(sys.stdin, sys.argv[1]):
+        ujson.dump(item, sys.stdout, ensure_ascii=False)
+        print >>sys.stdout, ''
+
+
+if "__main__" == __name__:
+    main()
